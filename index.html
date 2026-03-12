@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HJ Reparaciones — Celulares, Cámaras, Redes & Más</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --black:  #080808;
+      --black2: #111111;
+      --black3: #1a1a1a;
+      --yellow: #f5c400;
+      --yellow2:#ffd740;
+      --white:  #f5f5f0;
+      --muted:  rgba(245,245,240,0.45);
+      --border: rgba(245,196,0,0.15);
+      --font-h: 'Barlow Condensed', sans-serif;
+      --font-b: 'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(245,196,0,.025) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(245,196,0,.025) 60px);
+      pointer-events: none; z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse 65% 45% at 75% 15%, rgba(245,196,0,.06) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 66px;
+      background: rgba(8,8,8,.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-wrap {
+      display: flex; align-items: center; gap: .65rem;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 42px; width: 42px;
+      object-fit: contain;
+      filter: brightness(1);
+    }
+
+    .logo-text {
+      display: flex; flex-direction: column; line-height: 1.1;
+    }
+
+    .logo-name {
+      font-family: var(--font-h);
+      font-size: 1.15rem; font-weight: 900;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .logo-sub {
+      font-family: var(--font-h);
+      font-size: .68rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .nav-links { display: flex; list-style: none; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--font-h);
+      font-size: .92rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+
+    .nav-cta {
+      background: var(--yellow); color: #000;
+      font-family: var(--font-h); font-size: .88rem; font-weight: 800;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .52rem 1.4rem; border: none; cursor: pointer;
+      text-decoration: none;
+      clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+      transition: background .2s, transform .2s;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--yellow2); transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 22px; height: 2px; background: var(--muted); display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 3rem 5rem; gap: 3rem;
+      max-width: 1280px; margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-family: var(--font-h); font-size: .85rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 1.4rem;
+      animation: fadeUp .5s ease both;
+    }
+
+    .eye-line { width: 32px; height: 2px; background: var(--yellow); }
+
+    h1 {
+      font-family: var(--font-h);
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      font-weight: 900; line-height: .96;
+      letter-spacing: -.01em; text-transform: uppercase;
+      animation: fadeUp .6s ease .05s both;
+    }
+
+    h1 .yellow { color: var(--yellow); }
+
+    .hero-sub {
+      margin-top: 1.4rem; color: var(--muted);
+      font-size: .98rem; line-height: 1.75; max-width: 420px;
+      animation: fadeUp .6s ease .1s both;
+    }
+
+    /* Service pills */
+    .service-pills {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      margin-top: 1.5rem;
+      animation: fadeUp .6s ease .13s both;
+    }
+
+    .spill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(245,196,0,.07);
+      border: 1px solid rgba(245,196,0,.2);
+      font-family: var(--font-h); font-size: .75rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--yellow);
+      padding: .3rem .8rem;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; align-items: center;
+      margin-top: 2rem;
+      animation: fadeUp .6s ease .18s both;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      background: var(--yellow); color: #000;
+      font-family: var(--font-h); font-size: 1rem; font-weight: 800;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .88rem 2.1rem; border: none; cursor: pointer;
+      text-decoration: none;
+      clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+      transition: background .2s, transform .2s, box-shadow .2s;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-main:hover { background: var(--yellow2); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(245,196,0,.28); }
+
+    .btn-secondary {
+      background: transparent; color: var(--muted);
+      font-family: var(--font-h); font-size: 1rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid rgba(245,245,240,.15);
+      padding: .88rem 1.8rem;
+      clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+      transition: border-color .2s, color .2s; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+      margin-top: 3rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .6s ease .22s both; flex-wrap: wrap;
+    }
+
+    .stat-n { font-family: var(--font-h); font-size: 2.2rem; font-weight: 900; color: var(--yellow); line-height: 1; }
+    .stat-l { font-size: .74rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-top: .2rem; }
+
+    /* ── HERO VISUAL ── */
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      height: 520px; position: relative;
+    }
+
+    .cam-wrap {
+      position: relative; width: 340px; height: 340px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .bracket {
+      position: absolute; width: 46px; height: 46px;
+      border-color: var(--yellow); border-style: solid; opacity: .45;
+    }
+    .br-tl { top:0;left:0; border-width:2px 0 0 2px; }
+    .br-tr { top:0;right:0; border-width:2px 2px 0 0; }
+    .br-bl { bottom:0;left:0; border-width:0 0 2px 2px; }
+    .br-br { bottom:0;right:0; border-width:0 2px 2px 0; }
+
+    .scan-wrap { position:absolute; inset:20px; overflow:hidden; }
+    .scan-h {
+      position:absolute; left:0;right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(245,196,0,.8),transparent);
+      animation:scanH 3s ease-in-out infinite;
+    }
+
+    @keyframes scanH {
+      0%{top:0;opacity:1} 48%{opacity:1} 50%{top:100%;opacity:0} 51%{top:0;opacity:0} 52%{opacity:1} 100%{top:100%;opacity:1}
+    }
+
+    .cam-main {
+      position:relative; z-index:2;
+      display:flex; flex-direction:column; align-items:center; gap:1rem;
+    }
+
+    .cam-body-svg {
+      width:210px;
+      filter: drop-shadow(0 0 28px rgba(245,196,0,.22));
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    .cam-label {
+      font-family:var(--font-h); font-size:.7rem; font-weight:700;
+      letter-spacing:.25em; text-transform:uppercase; color:var(--yellow); opacity:.7;
+    }
+
+    .status-badge {
+      position:absolute; display:flex; align-items:center; gap:.45rem;
+      background:rgba(8,8,8,.88); border:1px solid var(--border);
+      padding:.48rem .85rem; backdrop-filter:blur(10px);
+      font-family:var(--font-h); font-size:.76rem; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+    }
+
+    .sb-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+    .sb-green { background:#22c55e; box-shadow:0 0 8px #22c55e; animation:blink 2s ease infinite; }
+    .sb-yellow { background:var(--yellow); box-shadow:0 0 8px var(--yellow); }
+    .sb1 { top:8%;left:-8%; animation:floatY 4.5s ease-in-out infinite -.5s; }
+    .sb2 { bottom:20%;right:-8%; animation:floatY 5s ease-in-out infinite -2s; }
+    .sb3 { bottom:2%;left:4%; animation:floatY 4s ease-in-out infinite -3s; }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* ── TICKER ── */
+    .brand-bar {
+      position:relative; z-index:1;
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+      padding:1rem 0; background:rgba(245,196,0,.03); overflow:hidden;
+    }
+
+    .ticker-track {
+      display:flex; gap:3.5rem;
+      animation:ticker 20s linear infinite; white-space:nowrap;
+    }
+
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    .t-item {
+      font-family:var(--font-h); font-size:.88rem; font-weight:800;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(245,245,240,.18); flex-shrink:0;
+      display:flex; align-items:center; gap:.7rem;
+    }
+    .t-sep { color:var(--yellow); opacity:.4; font-size:.6rem; }
+
+    /* ── SECTIONS ── */
+    .sec {
+      position:relative; z-index:1;
+      max-width:1280px; margin:0 auto; padding:7rem 3rem;
+    }
+
+    .sec-alt {
+      position:relative; z-index:1;
+      padding:7rem 3rem;
+      background:var(--black2);
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .sec-alt-inner { max-width:1280px; margin:0 auto; }
+
+    .tag {
+      font-family:var(--font-h); font-size:.76rem; font-weight:700;
+      letter-spacing:.2em; text-transform:uppercase; color:var(--yellow);
+      display:flex; align-items:center; gap:.55rem; margin-bottom:.6rem;
+    }
+    .tag::before { content:'//'; opacity:.5; }
+
+    .sec-title {
+      font-family:var(--font-h);
+      font-size:clamp(2rem,3.5vw,3.2rem); font-weight:900;
+      line-height:1; letter-spacing:-.01em; text-transform:uppercase;
+    }
+
+    .sec-sub {
+      color:var(--muted); font-size:.94rem;
+      max-width:460px; line-height:1.72; margin-top:.6rem;
+    }
+
+    /* ── SERVICES CARDS (4 principales) ── */
+    .main-services {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:1px; background:var(--border);
+      border:1px solid var(--border); margin-top:3.5rem;
+    }
+
+    .ms-card {
+      background:var(--black); padding:2.5rem 2rem;
+      position:relative; overflow:hidden; transition:background .2s;
+    }
+
+    .ms-card::before {
+      content:''; position:absolute; top:0;left:0;right:0; height:3px;
+      background:var(--yellow); transform:scaleX(0);
+      transform-origin:left; transition:transform .35s ease;
+    }
+
+    .ms-card:hover { background:#0c0c0c; }
+    .ms-card:hover::before { transform:scaleX(1); }
+
+    .ms-icon {
+      font-size:2.2rem; margin-bottom:1.25rem; display:block;
+      filter:drop-shadow(0 0 8px rgba(245,196,0,.15));
+    }
+
+    .ms-card h3 {
+      font-family:var(--font-h); font-size:1.6rem; font-weight:900;
+      text-transform:uppercase; letter-spacing:.03em; margin-bottom:.5rem;
+    }
+
+    .ms-card p { color:var(--muted); font-size:.9rem; line-height:1.7; max-width:360px; }
+
+    .ms-list {
+      list-style:none; margin-top:1rem;
+      display:flex; flex-direction:column; gap:.3rem;
+    }
+
+    .ms-list li {
+      font-size:.84rem; color:var(--muted);
+      display:flex; align-items:center; gap:.5rem;
+    }
+
+    .ms-list li::before {
+      content:''; width:4px; height:4px;
+      background:var(--yellow); border-radius:50%; flex-shrink:0;
+    }
+
+    .ms-num {
+      position:absolute; bottom:1.5rem; right:1.75rem;
+      font-family:var(--font-h); font-size:4rem; font-weight:900;
+      color:rgba(245,196,0,.06); line-height:1; pointer-events:none;
+    }
+
+    /* ── GALERÍA ── */
+    .img-grid {
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      grid-template-rows:200px 200px;
+      gap:1px; background:var(--border);
+      border:1px solid var(--border); margin-top:3.5rem;
+    }
+
+    .img-slot {
+      background:var(--black3); position:relative; overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:.5rem;
+      cursor:pointer; transition:background .2s;
+    }
+    .img-slot:hover { background:#1e1e1e; }
+    .img-slot.span-col { grid-row:span 2; }
+
+    .img-slot img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .ph-inner { display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+    .ph-icon { font-size:1.6rem; opacity:.25; }
+    .ph-text {
+      font-family:var(--font-h); font-size:.68rem; font-weight:700;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:rgba(245,245,240,.18); text-align:center;
+    }
+
+    .img-tag {
+      position:absolute; bottom:.7rem; left:.7rem;
+      background:rgba(8,8,8,.88); border:1px solid var(--border);
+      font-family:var(--font-h); font-size:.67rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--yellow);
+      padding:.2rem .6rem; backdrop-filter:blur(8px);
+    }
+
+    /* ── PRODUCTS ── */
+    .products-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1px; background:var(--border);
+      border:1px solid var(--border); margin-top:3.5rem;
+    }
+
+    .p-card {
+      background:var(--black); padding:1.75rem;
+      position:relative; overflow:hidden; transition:background .2s;
+    }
+
+    .p-card::before {
+      content:''; position:absolute; top:0;left:0;right:0; height:2px;
+      background:var(--yellow); transform:scaleX(0);
+      transform-origin:left; transition:transform .3s ease;
+    }
+    .p-card:hover { background:#0d0d0d; }
+    .p-card:hover::before { transform:scaleX(1); }
+
+    .p-num {
+      font-family:var(--font-h); font-size:.7rem; font-weight:800;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(245,196,0,.28); margin-bottom:.8rem;
+    }
+
+    .p-icon {
+      width:42px;height:42px; background:rgba(245,196,0,.07);
+      border:1px solid rgba(245,196,0,.18);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.2rem; margin-bottom:.9rem;
+    }
+
+    .p-card h3 {
+      font-family:var(--font-h); font-size:1.15rem; font-weight:800;
+      text-transform:uppercase; letter-spacing:.03em; margin-bottom:.4rem;
+    }
+
+    .p-card p { color:var(--muted); font-size:.84rem; line-height:1.65; }
+
+    .p-chip {
+      display:inline-block; margin-top:.8rem;
+      background:rgba(245,196,0,.07); border:1px solid rgba(245,196,0,.18);
+      color:var(--yellow); font-family:var(--font-h);
+      font-size:.66rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      padding:.2rem .65rem;
+    }
+
+    /* ── WHY ── */
+    .why-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:5rem; align-items:center;
+    }
+
+    .feat-list { display:flex; flex-direction:column; gap:1rem; margin-top:2.5rem; }
+
+    .feat {
+      display:flex; align-items:flex-start; gap:1.1rem;
+      padding:1.2rem; border:1px solid var(--border);
+      background:var(--black2); transition:border-color .2s;
+    }
+    .feat:hover { border-color:rgba(245,196,0,.35); }
+
+    .feat-ic {
+      width:36px;height:36px;flex-shrink:0;
+      background:rgba(245,196,0,.07); border:1px solid rgba(245,196,0,.18);
+      display:flex;align-items:center;justify-content:center; font-size:.95rem;
+    }
+
+    .feat h4 {
+      font-family:var(--font-h); font-size:1rem; font-weight:800;
+      text-transform:uppercase; letter-spacing:.04em; margin-bottom:.2rem;
+    }
+    .feat p { font-size:.83rem; color:var(--muted); line-height:1.55; }
+
+    /* Terminal */
+    .term-card { background:#050505; border:1px solid var(--border); }
+
+    .term-bar {
+      padding:.9rem 1.25rem; background:rgba(245,196,0,.04);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:.5rem;
+    }
+
+    .td { width:10px;height:10px;border-radius:50%; }
+    .td:nth-child(1){ background:#ff5f57; }
+    .td:nth-child(2){ background:#febc2e; }
+    .td:nth-child(3){ background:#28c840; }
+    .tlbl { margin-left:.4rem; font-size:.7rem; color:var(--muted); font-family:'Courier New',monospace; }
+
+    .term-body { padding:1.35rem; font-family:'Courier New',monospace; font-size:.77rem; line-height:2; }
+    .cg{color:#4ade80} .cy{color:#f5c400} .cb{color:#93c5fd} .co{color:#fb923c} .cm{color:rgba(245,245,240,.3)}
+    .blink-c { display:inline-block;width:7px;height:13px;background:var(--yellow);vertical-align:middle;animation:blink 1s infinite; }
+
+    /* ── CONTACT ── */
+    .contact-inner { max-width:780px; margin:0 auto; text-align:center; }
+
+    .contact-card {
+      background:var(--black2); border:1px solid var(--border);
+      padding:3rem; margin-top:3rem; text-align:left;
+    }
+
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .fg { display:flex; flex-direction:column; gap:.38rem; margin-bottom:.9rem; }
+    .fg.full { grid-column:1/-1; }
+
+    label {
+      font-family:var(--font-h); font-size:.72rem; font-weight:700;
+      letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
+    }
+
+    input,textarea,select {
+      background:rgba(255,255,255,.04); border:1px solid rgba(245,245,240,.1);
+      color:var(--white); padding:.78rem 1rem;
+      font-family:var(--font-b); font-size:.9rem;
+      outline:none; transition:border-color .2s; resize:vertical;
+    }
+    input::placeholder,textarea::placeholder { color:rgba(245,245,240,.2); }
+    input:focus,textarea:focus,select:focus { border-color:var(--yellow); }
+    select option { background:#111; }
+    textarea { min-height:95px; }
+
+    .sub-btn {
+      width:100%; background:var(--yellow); color:#000; border:none;
+      padding:1.05rem; font-family:var(--font-h); font-size:1.05rem;
+      font-weight:900; letter-spacing:.12em; text-transform:uppercase;
+      cursor:pointer; margin-top:.5rem;
+      clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
+      transition:background .2s, transform .2s, box-shadow .2s;
+    }
+    .sub-btn:hover { background:var(--yellow2); transform:translateY(-2px); box-shadow:0 10px 40px rgba(245,196,0,.28); }
+
+    .contact-meta {
+      display:flex; gap:2rem; margin-top:1.5rem;
+      padding-top:1.4rem; border-top:1px solid var(--border); flex-wrap:wrap;
+    }
+
+    .mi { display:flex; align-items:center; gap:.45rem; font-size:.85rem; color:var(--muted); }
+    .mi-dot { width:5px;height:5px; background:var(--yellow); border-radius:50%; flex-shrink:0; }
+
+    /* WhatsApp float */
+    .wa-float {
+      position:fixed; bottom:2rem; right:2rem; z-index:999;
+      background:#25d366; color:#fff;
+      width:58px; height:58px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.6rem; text-decoration:none;
+      box-shadow:0 4px 24px rgba(37,211,102,.4);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .wa-float:hover { transform:scale(1.1); box-shadow:0 8px 32px rgba(37,211,102,.55); }
+
+    /* ── FOOTER ── */
+    footer {
+      position:relative; z-index:1;
+      border-top:1px solid var(--border); padding:1.75rem 3rem;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:1rem; background:var(--black2);
+    }
+
+    footer p { font-size:.77rem; color:var(--muted); }
+    .fl { display:flex; gap:1.75rem; }
+    .fl a {
+      font-family:var(--font-h); font-size:.82rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--muted); text-decoration:none; transition:color .2s;
+    }
+    .fl a:hover { color:var(--yellow); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:1024px) {
+      .main-services { grid-template-columns:1fr 1fr; }
+      .products-grid { grid-template-columns:1fr 1fr; }
+      .why-grid { grid-template-columns:1fr; }
+      .img-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+      .img-slot.span-col { grid-row:auto; }
+    }
+
+    @media (max-width:768px) {
+      .hero { grid-template-columns:1fr; padding:5.5rem 1.5rem 3rem; }
+      .hero-right { display:none; }
+      nav { padding:0 1.5rem; }
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .nav-links.open {
+        display:flex; flex-direction:column;
+        position:fixed; top:66px; left:0; right:0;
+        background:rgba(8,8,8,.98); padding:2rem 1.5rem;
+        border-bottom:1px solid var(--border); gap:1.5rem;
+      }
+      .sec,.sec-alt { padding:5rem 1.5rem; }
+      .main-services,.products-grid { grid-template-columns:1fr; }
+      .form-row { grid-template-columns:1fr; }
+      footer { padding:1.5rem; flex-direction:column; text-align:center; }
+      .img-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/528440000000" target="_blank" title="WhatsApp">💬</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo-wrap">
+    <img src="logo.png" alt="HJ Reparaciones" class="logo-img"/>
+    <div class="logo-text">
+      <span class="logo-name">HJ Reparaciones</span>
+      <span class="logo-sub">Celulares · Cámaras · Redes & Más</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="nav-menu">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Cotizar</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="eye-line"></div>Frontera, Coahuila</div>
+    <h1>Tecnología<br>que <span class="yellow">sí</span><br>funciona</h1>
+    <p class="hero-sub">Reparamos celulares, instalamos cámaras de seguridad, configuramos redes y vendemos accesorios. Todo en un solo lugar.</p>
+
+    <div class="service-pills">
+      <span class="spill">📷 Cámaras</span>
+      <span class="spill">📱 Celulares</span>
+      <span class="spill">🌐 Redes</span>
+      <span class="spill">🛍️ Accesorios</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-main">
+        Cotización gratis
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#servicios" class="btn-secondary">Ver servicios</a>
+    </div>
+
+    <div class="hero-stats">
+      <div><div class="stat-n">+500</div><div class="stat-l">Clientes</div></div>
+      <div><div class="stat-n">5+</div><div class="stat-l">Años exp.</div></div>
+      <div><div class="stat-n">4</div><div class="stat-l">Servicios</div></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="cam-wrap">
+      <div class="bracket br-tl"></div>
+      <div class="bracket br-tr"></div>
+      <div class="bracket br-bl"></div>
+      <div class="bracket br-br"></div>
+      <div class="scan-wrap"><div class="scan-h"></div></div>
+      <div class="cam-main">
+        <svg class="cam-body-svg" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="45" width="160" height="80" rx="8" fill="#1a1a1a" stroke="#f5c400" stroke-width="1.5"/>
+          <rect x="165" y="60" width="45" height="50" rx="4" fill="#141414" stroke="#f5c400" stroke-width="1.5"/>
+          <circle cx="187" cy="85" r="18" fill="#0a0a0a" stroke="#f5c400" stroke-width="1.5"/>
+          <circle cx="187" cy="85" r="11" fill="#111" stroke="rgba(245,196,0,.3)" stroke-width="1"/>
+          <circle cx="187" cy="85" r="5" fill="rgba(245,196,0,.15)"/>
+          <circle cx="183" cy="81" r="2" fill="rgba(245,196,0,.5)"/>
+          <rect x="55" y="30" width="50" height="20" rx="3" fill="#1a1a1a" stroke="#f5c400" stroke-width="1.5"/>
+          <rect x="72" y="18" width="16" height="18" rx="2" fill="#141414" stroke="#f5c400" stroke-width="1.5"/>
+          <circle cx="35" cy="70" r="3" fill="rgba(245,196,0,.3)"/>
+          <circle cx="35" cy="85" r="3" fill="rgba(245,196,0,.3)"/>
+          <circle cx="35" cy="100" r="3" fill="rgba(245,196,0,.3)"/>
+          <circle cx="150" cy="55" r="4" fill="#f5c400" opacity=".9"/>
+          <circle cx="150" cy="55" r="7" fill="rgba(245,196,0,.15)"/>
+          <line x1="90" y1="65" x2="140" y2="65" stroke="rgba(245,196,0,.15)" stroke-width="1"/>
+          <line x1="90" y1="73" x2="140" y2="73" stroke="rgba(245,196,0,.15)" stroke-width="1"/>
+          <line x1="90" y1="81" x2="140" y2="81" stroke="rgba(245,196,0,.15)" stroke-width="1"/>
+        </svg>
+        <div class="cam-label">● Sistema activo — HD 4K</div>
+      </div>
+      <div class="status-badge sb1"><div class="sb-dot sb-green"></div>Cámara Online</div>
+      <div class="status-badge sb2"><div class="sb-dot sb-yellow"></div>Grabando 24/7</div>
+      <div class="status-badge sb3"><div class="sb-dot sb-green"></div>App conectada</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="brand-bar">
+  <div class="ticker-track">
+    <span class="t-item">DAHUA<span class="t-sep">◆</span></span>
+    <span class="t-item">HIKVISION<span class="t-sep">◆</span></span>
+    <span class="t-item">SAMSUNG<span class="t-sep">◆</span></span>
+    <span class="t-item">APPLE<span class="t-sep">◆</span></span>
+    <span class="t-item">XIAOMI<span class="t-sep">◆</span></span>
+    <span class="t-item">TP-LINK<span class="t-sep">◆</span></span>
+    <span class="t-item">MOTOROLA<span class="t-sep">◆</span></span>
+    <span class="t-item">REOLINK<span class="t-sep">◆</span></span>
+    <span class="t-item">DAHUA<span class="t-sep">◆</span></span>
+    <span class="t-item">HIKVISION<span class="t-sep">◆</span></span>
+    <span class="t-item">SAMSUNG<span class="t-sep">◆</span></span>
+    <span class="t-item">APPLE<span class="t-sep">◆</span></span>
+    <span class="t-item">XIAOMI<span class="t-sep">◆</span></span>
+    <span class="t-item">TP-LINK<span class="t-sep">◆</span></span>
+    <span class="t-item">MOTOROLA<span class="t-sep">◆</span></span>
+    <span class="t-item">REOLINK<span class="t-sep">◆</span></span>
+  </div>
+</div>
+
+<!-- SERVICIOS PRINCIPALES -->
+<div class="sec" id="servicios">
+  <div class="reveal">
+    <div class="tag">Servicios principales</div>
+    <h2 class="sec-title">Todo lo que<br>necesitas, aquí</h2>
+    <p class="sec-sub">Un equipo especializado en cada área para darte el mejor resultado.</p>
+  </div>
+  <div class="main-services">
+
+    <div class="ms-card reveal">
+      <span class="ms-icon">📷</span>
+      <h3>Cámaras de Seguridad</h3>
+      <p>Venta e instalación de sistemas CCTV. Monitoreo remoto desde tu celular, grabación 24/7 y soporte técnico incluido.</p>
+      <ul class="ms-list">
+        <li>Cámaras HD, 4K y PTZ</li>
+        <li>NVR / DVR multicanal</li>
+        <li>Residencial, comercial e industrial</li>
+        <li>Distribuidores Dahua &amp; Hikvision</li>
+      </ul>
+      <div class="ms-num">01</div>
+    </div>
+
+    <div class="ms-card reveal">
+      <span class="ms-icon">📱</span>
+      <h3>Reparación de Celulares</h3>
+      <p>Diagnóstico gratuito y reparación rápida de smartphones. Trabajamos con todas las marcas y modelos.</p>
+      <ul class="ms-list">
+        <li>Cambio de pantalla y batería</li>
+        <li>Reparación de carga y bocinas</li>
+        <li>iPhone, Samsung, Xiaomi, Motorola</li>
+        <li>Garantía en todas las reparaciones</li>
+      </ul>
+      <div class="ms-num">02</div>
+    </div>
+
+    <div class="ms-card reveal">
+      <span class="ms-icon">🌐</span>
+      <h3>Redes / IT</h3>
+      <p>Instalación y configuración de redes empresariales y domésticas. Internet estable y seguro para tu negocio u hogar.</p>
+      <ul class="ms-list">
+        <li>Cableado estructurado Cat6</li>
+        <li>Routers, switches y access points</li>
+        <li>Redes WiFi empresariales</li>
+        <li>Soporte remoto y presencial</li>
+      </ul>
+      <div class="ms-num">03</div>
+    </div>
+
+    <div class="ms-card reveal">
+      <span class="ms-icon">🛍️</span>
+      <h3>Venta de Accesorios</h3>
+      <p>Accesorios originales y de calidad para tu celular y equipos de seguridad. Envío y entrega local disponible.</p>
+      <ul class="ms-list">
+        <li>Fundas, vidrios y cargadores</li>
+        <li>Cables, audífonos y memorias</li>
+        <li>Discos WD Purple para CCTV</li>
+        <li>Herramientas y consumibles IT</li>
+      </ul>
+      <div class="ms-num">04</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- GALERÍA -->
+<div class="sec-alt" id="galeria">
+  <div class="sec-alt-inner">
+    <div class="reveal">
+      <div class="tag">Galería</div>
+      <h2 class="sec-title">Nuestro trabajo<br>habla por sí solo</h2>
+      <p class="sec-sub">Sube tus fotos reales de instalaciones, reparaciones y tu local — da mucho más confianza a tus clientes.</p>
+    </div>
+
+    <!--
+      ══ CÓMO AGREGAR TUS FOTOS ══
+      1. Pon tus imágenes en la misma carpeta que index.html
+      2. Reemplaza cada <div class="ph-inner">...</div> con:
+         <img src="nombre-de-tu-foto.jpg" alt="descripción"/>
+      3. Cambia el texto de .img-tag al título que quieras
+
+      Ejemplo:
+      <div class="img-slot span-col">
+        <img src="instalacion-principal.jpg" alt="Instalación residencial"/>
+        <div class="img-tag">Instalación residencial</div>
+      </div>
+    -->
+    <div class="img-grid reveal">
+      <div class="img-slot span-col">
+        <div class="ph-inner"><div class="ph-icon">📸</div><div class="ph-text">Foto principal<br>tu mejor instalación</div></div>
+        <div class="img-tag">Instalación destacada</div>
+      </div>
+      <div class="img-slot">
+        <div class="ph-inner"><div class="ph-icon">🏢</div><div class="ph-text">Foto 2</div></div>
+        <div class="img-tag">Comercial</div>
+      </div>
+      <div class="img-slot">
+        <div class="ph-inner"><div class="ph-icon">📱</div><div class="ph-text">Foto 3</div></div>
+        <div class="img-tag">Reparación celular</div>
+      </div>
+      <div class="img-slot">
+        <div class="ph-inner"><div class="ph-icon">🌐</div><div class="ph-text">Foto 4</div></div>
+        <div class="img-tag">Instalación de red</div>
+      </div>
+      <div class="img-slot">
+        <div class="ph-inner"><div class="ph-icon">🏠</div><div class="ph-text">Foto 5</div></div>
+        <div class="img-tag">Residencial</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTOS / EQUIPOS -->
+<div class="sec" id="productos">
+  <div class="reveal">
+    <div class="tag">Equipos y productos</div>
+    <h2 class="sec-title">Lo que tenemos<br>para ti</h2>
+    <p class="sec-sub">Equipos originales con garantía de fábrica. Pregunta por nuestros paquetes.</p>
+  </div>
+  <div class="products-grid">
+    <div class="p-card reveal">
+      <div class="p-num">01</div><div class="p-icon">📷</div>
+      <h3>Cámaras IP / HD</h3>
+      <p>2MP a 8MP (4K). Visión nocturna, detección IA y app de monitoreo remoto.</p>
+      <span class="p-chip">Dahua · Hikvision</span>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-num">02</div><div class="p-icon">🖥️</div>
+      <h3>NVR / DVR</h3>
+      <p>Grabadores de 4 a 32 canales. Compatibles con discos WD Purple.</p>
+      <span class="p-chip">4–32 canales</span>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-num">03</div><div class="p-icon">📡</div>
+      <h3>Routers & Switches</h3>
+      <p>Equipos TP-Link y Ubiquiti para redes domésticas y empresariales de alto rendimiento.</p>
+      <span class="p-chip">TP-Link · Ubiquiti</span>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-num">04</div><div class="p-icon">🔋</div>
+      <h3>Refacciones Celular</h3>
+      <p>Pantallas, baterías, flex de carga y más. Para iPhone, Samsung, Xiaomi y Motorola.</p>
+      <span class="p-chip">Originales & compatibles</span>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-num">05</div><div class="p-icon">🛡️</div>
+      <h3>Accesorios Premium</h3>
+      <p>Fundas, vidrios templados, cargadores rápidos, audífonos y cables certificados.</p>
+      <span class="p-chip">Todas las marcas</span>
+    </div>
+    <div class="p-card reveal">
+      <div class="p-num">06</div><div class="p-icon">💾</div>
+      <h3>Almacenamiento</h3>
+      <p>Discos WD Purple para CCTV, memorias SD, pendrives y discos SSD.</p>
+      <span class="p-chip">WD · SanDisk · Kingston</span>
+    </div>
+  </div>
+</div>
+
+<!-- POR QUÉ NOSOTROS -->
+<div class="sec-alt" id="nosotros">
+  <div class="sec-alt-inner">
+    <div class="why-grid">
+      <div>
+        <div class="reveal">
+          <div class="tag">Por qué elegirnos</div>
+          <h2 class="sec-title">Servicio real,<br>sin rodeos</h2>
+        </div>
+        <div class="feat-list">
+          <div class="feat reveal">
+            <div class="feat-ic">🎓</div>
+            <div><h4>Técnicos certificados</h4><p>Personal capacitado en instalaciones CCTV, reparación de dispositivos y configuración de redes.</p></div>
+          </div>
+          <div class="feat reveal">
+            <div class="feat-ic">⚡</div>
+            <div><h4>Respuesta rápida</h4><p>Diagnóstico mismo día. La mayoría de reparaciones de celular se entregan en 24–48 hrs.</p></div>
+          </div>
+          <div class="feat reveal">
+            <div class="feat-ic">🛡️</div>
+            <div><h4>Garantía incluida</h4><p>Todas las reparaciones y equipos tienen garantía. Si algo falla, lo resolvemos sin costo.</p></div>
+          </div>
+          <div class="feat reveal">
+            <div class="feat-ic">📍</div>
+            <div><h4>Servicio local</h4><p>Somos de Frontera, Coahuila. Atención presencial, a domicilio y soporte remoto disponible.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="term-card">
+          <div class="term-bar">
+            <div class="td"></div><div class="td"></div><div class="td"></div>
+            <span class="tlbl">hj_reparaciones — status.sh</span>
+          </div>
+          <div class="term-body">
+            <div><span class="cg">✓</span> <span class="cy">servicio_activo</span> → HJ Reparaciones</div>
+            <div><span class="cg">✓</span> <span class="cb">camaras</span> <span class="cm">instalacion CCTV</span> <span class="cg">DISPONIBLE</span></div>
+            <div><span class="cg">✓</span> <span class="cb">celulares</span> <span class="cm">reparacion rapida</span> <span class="cg">DISPONIBLE</span></div>
+            <div><span class="cg">✓</span> <span class="cb">redes</span> <span class="cm">instalacion IT</span> <span class="cg">DISPONIBLE</span></div>
+            <div><span class="cg">✓</span> <span class="cb">accesorios</span> <span class="cm">venta directa</span> <span class="cg">DISPONIBLE</span></div>
+            <div style="margin-top:.3rem"><span class="co">📍 ubicacion</span> <span class="cm">Frontera, Coahuila</span></div>
+            <div><span class="cy">→</span> diagnostico_gratis <span class="cg">ACTIVADO</span></div>
+            <div><span class="cy">→</span> garantia_incluida <span class="cg">ACTIVADA</span></div>
+            <div style="margin-top:.3rem"><span class="cm">clientes_atendidos:</span> <span class="cb">+500</span></div>
+            <div><span class="cm">status:</span> <span class="cg">ABIERTO</span> <span class="blink-c"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="sec" id="contacto">
+  <div class="contact-inner">
+    <div class="reveal"><div class="tag" style="justify-content:center">Contacto</div></div>
+    <h2 class="sec-title reveal">Escríbenos,<br>te respondemos hoy</h2>
+    <p class="sec-sub reveal" style="margin:.5rem auto 0">Cotización sin costo. Cuéntanos qué necesitas y te damos precio al momento.</p>
+
+    <div class="contact-card reveal">
+      <div class="form-row">
+        <div class="fg"><label>Nombre completo</label><input type="text" placeholder="Juan García"/></div>
+        <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+52 844 000 0000"/></div>
+        <div class="fg"><label>Correo electrónico</label><input type="email" placeholder="juan@ejemplo.com"/></div>
+        <div class="fg">
+          <label>Servicio que necesitas</label>
+          <select>
+            <option>Cámaras de seguridad</option>
+            <option>Reparación de celular</option>
+            <option>Redes / IT</option>
+            <option>Venta de accesorios</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="fg full"><label>Cuéntanos más</label><textarea placeholder="¿Qué necesitas? ¿Es urgente? Cualquier detalle ayuda..."></textarea></div>
+      </div>
+      <button class="sub-btn" onclick="handleSub(this)">Enviar mensaje →</button>
+      <div class="contact-meta">
+        <div class="mi"><div class="mi-dot"></div>+52 844 000 0000</div>
+        <div class="mi"><div class="mi-dot"></div>hj.reparaciones@gmail.com</div>
+        <div class="mi"><div class="mi-dot"></div>Frontera, Coahuila</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#inicio" class="logo-wrap">
+    <img src="logo.png" alt="HJ Reparaciones" class="logo-img"/>
+    <div class="logo-text">
+      <span class="logo-name">HJ Reparaciones</span>
+      <span class="logo-sub">& Más</span>
+    </div>
+  </a>
+  <p>© 2026 HJ Reparaciones y Más. Frontera, Coahuila.</p>
+  <div class="fl">
+    <a href="#servicios">Servicios</a>
+    <a href="#galeria">Galería</a>
+    <a href="#productos">Productos</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(l =>
+    l.addEventListener('click', () => document.getElementById('nav-menu').classList.remove('open'))
+  );
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  function handleSub(btn) {
+    btn.textContent = '✓ Mensaje enviado — te contactamos hoy mismo';
+    btn.style.background = '#22c55e';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
